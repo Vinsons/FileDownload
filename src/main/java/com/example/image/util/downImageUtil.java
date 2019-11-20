@@ -20,10 +20,24 @@ public class downImageUtil {
             url1 = new URL(url);
             int lastgang = url.lastIndexOf("/");
             int begin = url.lastIndexOf(".");
-            String names = url.substring(lastgang+1,begin);
+            String names = url.substring(lastgang + 1, begin);
             String suffix = url.substring(url.lastIndexOf("."));
-            String fileName = names +suffix;
-            localPath = localPath+"/"+fileName;
+            String fileName = names + suffix;
+
+
+            File file = new File(localPath);
+            File[] listFile = file.listFiles();
+            int count = 0;
+            for (File file1 : listFile) {
+                if (fileName.equals(file1.getName())) {
+                    count++;
+                }
+            }
+            if (count > 0) {
+                localPath = localPath + "/" + names + "(" + count + ")" + suffix;
+            } else {
+                localPath = localPath + "/" + fileName;
+            }
             DataInputStream dataInputStream = new DataInputStream(url1.openStream());
             FileOutputStream fileOutputStream = new FileOutputStream(new File(localPath));
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -49,5 +63,6 @@ public class downImageUtil {
         String url = "http://pic.cssn.cn/tp/tp_tpqh/201911/W020191114592042611208.jpg";
         String localPath = "H:/123/";
         download(url, localPath);
+
     }
 }
