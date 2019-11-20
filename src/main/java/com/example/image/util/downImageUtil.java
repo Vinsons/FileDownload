@@ -23,8 +23,9 @@ public class downImageUtil {
             String names = url.substring(lastgang+1,begin);
             String suffix = url.substring(url.lastIndexOf("."));
             String fileName = names +suffix;
+            localPath = localPath+"/"+fileName;
             DataInputStream dataInputStream = new DataInputStream(url1.openStream());
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(localPath+"/"+fileName));
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(localPath));
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             int length;
